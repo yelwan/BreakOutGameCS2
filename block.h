@@ -4,7 +4,8 @@
 class Block
 {
 public:
-    Block();
+    Block(qreal x, qreal y, QGraphicsItem* parent = nullptr);
+    void collisions();
 };
 
 #endif // BLOCK_H
