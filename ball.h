@@ -1,10 +1,12 @@
 #ifndef BALL_H
 #define BALL_H
-
-class Ball
+#include "QGraphicsItem"
+class Ball : QGraphicsItem, QObject
 {
 private:
     QGraphicsEllipseItem *circle;
+    int velocityX;
+    int velocityY;
 public:
     Ball();
 public slots:
