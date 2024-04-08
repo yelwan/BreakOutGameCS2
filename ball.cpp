@@ -10,13 +10,14 @@
 #include <typeinfo>
 #include <time.h>
 #include <cmath>
-Ball::Ball(): velocityX(5), velocityY(-5)  {
-    circle = new QGraphicsEllipseItem(80, 80, 40, 40);
-    circle->setPos(1,1);
+Ball::Ball(QGraphicsEllipseItem* circle) : QGraphicsEllipseItem(80, 80, 40, 40), velocityX(5), velocityY(-5)  {
+    this->circle= circle;
+    this->circle = new QGraphicsEllipseItem(80, 80, 40, 40);
+    this->circle->setPos(1,1);
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()),this,SLOT (move()));
     timer->start(50);
-    scene()->addItem(circle);
+    scene()->addItem(this->circle);
 }
 void Ball::move() {
     circle->setPos(x()+velocityX,y()+velocityY);
@@ -27,9 +28,9 @@ void Ball::move() {
             velocityY = -velocityY;
         }
         if (typeid(*(colliding_items[i]))==typeid(Block)) {
-                scene()->removeItem(colliding_items[i]);
-                delete colliding_items[i];
-                velocityY = -velocityY;
+            scene()->removeItem(colliding_items[i]);
+            delete colliding_items[i];
+            velocityY = -velocityY;
         }
     }
 

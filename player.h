@@ -3,7 +3,7 @@
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
 #include "ball.h"
-class Player : QGraphicsItem, QObject, QGraphicsScene {
+class Player : public QGraphicsRectItem, QGraphicsScene {
 private:
     QGraphicsTextItem *healthText;
     QGraphicsTextItem* scoreText;
@@ -12,7 +12,7 @@ private:
     QGraphicsRectItem* player;
     Ball *balls;
 public:
-    Player(QGraphicsRectItem* player);
+    Player(QGraphicsRectItem*);
     ~Player();
     void IncreaseScore();
     void DecreaseScore();

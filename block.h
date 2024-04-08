@@ -2,14 +2,14 @@
 #define BLOCK_H
 #include "QGraphicsItem"
 #include <QGraphicsRectItem>
-class Block : QGraphicsItem, QGraphicsRectItem
+class Block : public QGraphicsRectItem
 {
 private:
-    int BLOCK_WIDTH;
-    int BLOCK_HEIGHT;
+    qreal BLOCK_WIDTH;
+    qreal BLOCK_HEIGHT;
     QGraphicsRectItem  * blocks= new QGraphicsRectItem();
 public:
-    Block(qreal x, qreal y, QGraphicsItem* parent = nullptr);
+    Block(qreal x, qreal y, QGraphicsItem* parent);
 
 };
 

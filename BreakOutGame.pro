@@ -14,7 +14,6 @@ SOURCES += \
     gameover.cpp \
     level.cpp \
     main.cpp \
-    mainwindow.cpp \
     player.cpp
 
 HEADERS += \
@@ -22,12 +21,10 @@ HEADERS += \
     block.h \
     gameover.h \
     level.h \
-    mainwindow.h \
     player.h
 
 FORMS += \
-    gameover.ui \
-    mainwindow.ui
+    gameover.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
