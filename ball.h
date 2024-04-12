@@ -15,6 +15,7 @@ private:
 
 public:
     Ball();
+public slots:
     void move();
 };
 

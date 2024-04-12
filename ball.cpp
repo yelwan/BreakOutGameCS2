@@ -20,12 +20,12 @@ void Ball::move()
     QList<QGraphicsItem *> collidingItemsList = collidingItems();
     for (int i = 0; i < collidingItemsList.size(); i++)
     {
-        if (typeid(*(collidingItemsList[i])) == typeid(Player))
+        if (typeid(collidingItemsList[i]) == typeid(Player))
         {
             velocityX = -velocityX;
             velocityY = -velocityY;
         }
-        else if (typeid(*(collidingItemsList[i])) == typeid(Block))
+        else if (typeid(collidingItemsList[i]) == typeid(Block))
         {
             scene()->removeItem(collidingItemsList[i]);
             delete collidingItemsList[i];

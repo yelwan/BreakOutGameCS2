@@ -11,10 +11,11 @@ class Player : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Player();
-    void keyPressEvent(QKeyEvent *event) override;
     int health;
     int score;
     int playerSpeed;
+public:
+    void keyPressEvent(QKeyEvent *event) ;
 private:
     QGraphicsTextItem *healthText;
     QGraphicsTextItem *scoreText;
