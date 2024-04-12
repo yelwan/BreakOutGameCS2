@@ -1,22 +1,24 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+
 #include <QGraphicsRectItem>
 #include <QGraphicsScene>
-#include "ball.h"
-class Player : public QGraphicsRectItem, QGraphicsScene {
-private:
-    QGraphicsTextItem *healthText;
-    QGraphicsTextItem* scoreText;
+#include <QGraphicsTextItem>
+#include <QKeyEvent>
+
+class Player : public QObject, public QGraphicsPixmapItem
+{
+    Q_OBJECT
+public:
+    Player();
+    void keyPressEvent(QKeyEvent *event) override;
     int health;
     int score;
-    QGraphicsRectItem* player;
-    Ball *balls;
-public:
-    Player(QGraphicsRectItem*);
-    ~Player();
-    void IncreaseScore();
-    void DecreaseScore();
-    void keyPressEvent(QKeyEvent * event);
+    int playerSpeed;
+private:
+    QGraphicsTextItem *healthText;
+    QGraphicsTextItem *scoreText;
+
 };
 
 #endif // PLAYER_H

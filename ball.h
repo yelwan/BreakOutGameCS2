@@ -1,15 +1,20 @@
 #ifndef BALL_H
 #define BALL_H
-#include "QGraphicsItem"
-class Ball :  QGraphicsEllipseItem, QObject
+
+#include <QGraphicsEllipseItem>
+#include <QObject>
+#include <QTimer>
+
+class Ball : public QObject, public QGraphicsPixmapItem
 {
+    Q_OBJECT
 private:
-    QGraphicsEllipseItem *circle;
+    QTimer *timer;
     int velocityX;
     int velocityY;
+
 public:
-    Ball(QGraphicsEllipseItem *circle);
-public slots:
+    Ball();
     void move();
 };
 

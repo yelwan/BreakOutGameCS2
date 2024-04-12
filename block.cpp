@@ -1,10 +1,8 @@
 #include "block.h"
-#include <QGraphicsRectItem>
-#include <QBrush>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <ball.h>
-Block::Block(qreal x, qreal y, QGraphicsItem* parent) : QGraphicsRectItem(x, y,  BLOCK_WIDTH,  BLOCK_HEIGHT, parent) {
-    setBrush(Qt::green);
-}
 
+Block::Block(qreal x, qreal y)
+{
+    QPixmap pix("C:/Users/Yehia/Downloads/block.png");
+    setPixmap(pix.scaled(pix.height(),pix.width()));
+    setPos(x,y);
+}

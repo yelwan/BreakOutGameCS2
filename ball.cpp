@@ -1,43 +1,41 @@
-#include "ball.h"
 #include <QTimer>
-#include <QGraphicsScene>
-#include "QGraphicsScene"
-#include <QGraphicsEllipseItem>
-#include <QBrush>
-#include <QObject>
+#include "ball.h"
 #include "player.h"
 #include "block.h"
-#include <typeinfo>
-#include <time.h>
-#include <cmath>
-Ball::Ball(QGraphicsEllipseItem* circle) : QGraphicsEllipseItem(80, 80, 40, 40), velocityX(5), velocityY(-5)  {
-    this->circle= circle;
-    this->circle = new QGraphicsEllipseItem(80, 80, 40, 40);
-    this->circle->setPos(1,1);
-    QTimer * timer = new QTimer();
-    connect(timer, SIGNAL(timeout()),this,SLOT (move()));
+#include <QGraphicsScene>
+
+Ball::Ball() : velocityX(5), velocityY(-5)
+{
+    QPixmap pix("C:/Users/Yehia/Downloads/ball.png");
+    setPixmap(pix.scaled(pix.height(), pix.width()));
+
+    timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(50);
-    scene()->addItem(this->circle);
 }
-void Ball::move() {
-    circle->setPos(x()+velocityX,y()+velocityY);
-    QList <QGraphicsItem *> colliding_items= collidingItems();
-    for (int i=0;i<colliding_items.size();i++) {
-        if (typeid(*(colliding_items[i]))==typeid(Player)) {
+
+void Ball::move()
+{
+    setPos(x() + velocityX, y() + velocityY);
+    QList<QGraphicsItem *> collidingItemsList = collidingItems();
+    for (int i = 0; i < collidingItemsList.size(); i++)
+    {
+        if (typeid(*(collidingItemsList[i])) == typeid(Player))
+        {
             velocityX = -velocityX;
             velocityY = -velocityY;
         }
-        if (typeid(*(colliding_items[i]))==typeid(Block)) {
-            scene()->removeItem(colliding_items[i]);
-            delete colliding_items[i];
+        else if (typeid(*(collidingItemsList[i])) == typeid(Block))
+        {
+            scene()->removeItem(collidingItemsList[i]);
+            delete collidingItemsList[i];
             velocityY = -velocityY;
         }
     }
 
-    if (pos().x() <= 0 || pos().x() >= scene()->width() - circle->rect().width()) {
+    if (pos().x() <= 0 || pos().x() + pixmap().width() >= scene()->width())
         velocityX = -velocityX;
-    }
-    if (pos().y() <= 0 || pos().y() >= scene()->height() - circle->rect().height()) {
+
+    if (pos().y() <= 0 || pos().y() + pixmap().height() >= scene()->height())
         velocityY = -velocityY;
-    }
 }
