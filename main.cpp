@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QGraphicsPixmapItem>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
@@ -15,9 +16,13 @@ int main(int argc, char *argv[])
     Player *player = new Player();
     player->setPixmap(QPixmap("C:/Users/Yehia/Downloads/Rectangle.png"));
     scene.addItem(player);
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 10; j++) {
-            Block* block = new Block(j*80,i*20);
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 10; j++)
+        {
+            qreal blockX = j * 8;
+            qreal blockY = i * 2;
+            Block* block = new Block(blockX, blockY);
             scene.addItem(block);
         }
     }

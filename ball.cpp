@@ -1,4 +1,5 @@
 #include <QTimer>
+#include <QObject>
 #include "ball.h"
 #include "player.h"
 #include "block.h"
@@ -8,9 +9,8 @@ Ball::Ball() : velocityX(5), velocityY(-5)
 {
     QPixmap pix("C:/Users/Yehia/Downloads/ball.png");
     setPixmap(pix.scaled(pix.height(), pix.width()));
-
     timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    QObject::connect(timer, SIGNAL (timeout()), this, SLOT (move()));
     timer->start(50);
 }
 
