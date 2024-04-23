@@ -1,11 +1,13 @@
 #include "player.h"
 #include <QGraphicsPixmapItem>
 #include <QTimer>
+#include <iostream>
+using namespace std;
 Player::Player() :  health(3), score(0), playerSpeed(10)
 {
     QPixmap pix("/Users/daliakadry/Downloads/Rectangle.png");
     setPixmap(pix.scaled(25,25));
-    setPos(400,300);
+   setPos(375,555);
     health = 3; // Initialize health to 3
     score = 0; // Initialize score to 0
     // Create QGraphicsTextItem for health
@@ -34,7 +36,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_Right)
     {
 
-        if (pos().x() < 0 )
+        if (pos().x() + pixmap().width() < scene()->width())
         {
             setPos(x() + playerSpeed, y());
         }

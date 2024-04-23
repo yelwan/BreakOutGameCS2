@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
     QGraphicsScene scene;
     scene.setSceneRect(0,0,800,600);
     Player *player = new Player();
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
     scene.addItem(player);
     for (int i = 0; i < 5; i++)
     {

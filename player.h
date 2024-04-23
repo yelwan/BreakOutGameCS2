@@ -5,7 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 #include <QKeyEvent>
-
+#include <QTimer>
 class Player : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
@@ -14,7 +14,6 @@ public:
     int health;
     int score;
     int playerSpeed;
-public:
     void keyPressEvent(QKeyEvent *event) ;
 private:
     QGraphicsTextItem *healthText;

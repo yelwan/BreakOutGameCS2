@@ -9,7 +9,7 @@ Ball::Ball() : velocityX(5), velocityY(-5)
 {
     QPixmap pix("/Users/daliakadry/Downloads/ball.png");
     setPixmap(pix.scaled(25,25));
-    setPos(300,400);
+    setPos(375, 475);
     timer = new QTimer();
     QObject::connect(timer, SIGNAL (timeout()), this, SLOT (move()));
     timer->start(50);
