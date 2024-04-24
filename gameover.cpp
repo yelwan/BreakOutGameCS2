@@ -8,7 +8,7 @@ GameOver::GameOver(QWidget *parent)
     : QDialog(parent)
 {
     QLabel *gameOverLabel = new QLabel("Game Over", this);
-    QFont font("Arial", 24, QFont::Bold); // Adjust font size and style as needed
+    QFont font("Arial", 24, QFont::Bold);
     gameOverLabel->setFont(font);
     gameOverLabel->setAlignment(Qt::AlignCenter);
 

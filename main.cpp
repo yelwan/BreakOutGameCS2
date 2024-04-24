@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
             scene.addItem(block);
         }
     }
-    Ball *ball = new Ball();
+    Ball *ball = new Ball(player);
     scene.addItem(ball);
     view.setScene(&scene);
     view.show();

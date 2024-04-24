@@ -11,14 +11,14 @@ class Player : public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Player();
-    int health;
+    void keyPressEvent(QKeyEvent *event);
+    void decrease();
+    void updateText();
+    void initializeText(QGraphicsTextItem* textItem, const QString& text, const QColor& color, int x, int y, int T);
+    void increase();
+private:
     int score;
     int playerSpeed;
-    void keyPressEvent(QKeyEvent *event);
-    void decreaseHealth();
-
-private:
-    QGraphicsTextItem *healthText;
     QGraphicsTextItem *scoreText;
 };
 
