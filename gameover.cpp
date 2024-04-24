@@ -17,8 +17,4 @@ GameOver::GameOver(QWidget *parent)
     setLayout(layout);
 }
 
-GameOver::~GameOver()
-{
-}
-
-
+GameOver::~GameOver() {}

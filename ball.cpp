@@ -3,16 +3,16 @@
 #include <QObject>
 #include <QTimer>
 #include "block.h"
-#include "player.h"
 #include "gameover.h"
-Ball::Ball(Player* player)
+#include "player.h"
+Ball::Ball(Player *player)
     : velocityX(5)
     , velocityY(-5)
 {
     QPixmap pix(":/images/Bullet.png");
     setPixmap(pix.scaled(25, 25));
     setPos(375, 475);
-    this->player= player;
+    this->player = player;
     timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(50);
@@ -38,12 +38,12 @@ void Ball::move()
         velocityX = -velocityX;
 
     if (pos().y() <= 0 || pos().y() + pixmap().height() >= scene()->height()) {
-        velocityY = - velocityY;
-
- }
+        velocityY = -velocityY;
+    }
     if (pos().y() > player->pos().y()) {
-     GameOver*g=new GameOver();
+        deleteLater();
+        GameOver *g = new GameOver;
         g->show();
-     scene()->removeItem(this);
- }
+
+    }
 }

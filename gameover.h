@@ -5,8 +5,8 @@
 #include <QDialog>
 #include <QLabel>
 
-    namespace Ui {
-    class GameOver;
+namespace Ui {
+class GameOver;
 }
 
 class GameOver : public QDialog

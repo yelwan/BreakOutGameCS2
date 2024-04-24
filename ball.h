@@ -13,8 +13,9 @@ private:
     int velocityX;
     int velocityY;
     Player *player;
+
 public:
-    Ball(Player* player);
+    Ball(Player *player);
 public slots:
     void move();
 };

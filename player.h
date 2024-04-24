@@ -14,8 +14,10 @@ public:
     void keyPressEvent(QKeyEvent *event);
     void decrease();
     void updateText();
-    void initializeText(QGraphicsTextItem* textItem, const QString& text, const QColor& color, int x, int y, int T);
+    void initializeText(
+        QGraphicsTextItem *textItem, const QString &text, const QColor &color, int x, int y, int T);
     void increase();
+
 private:
     int score;
     int playerSpeed;
