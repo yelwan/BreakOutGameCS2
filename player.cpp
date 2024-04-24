@@ -21,7 +21,7 @@ Player::Player()
 
 void Player::keyPressEvent(QKeyEvent *event)
 {
-    initializeText(scoreText, "Score: ", Qt::blue, 60, 80, score);
+    initializeText(scoreText, "Score: ", Qt::blue, 60, 100, score);
     if (event->key() == Qt::Key_Left) {
         if (pos().x() > 0) {
             setPos(x() - playerSpeed, y());
