@@ -6,13 +6,12 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "gameover.h"
 #include <QtCore/qmetatype.h>
+#include "gameover.h"
 
 #include <QtCore/qtmochelpers.h>
 
 #include <memory>
-
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -33,50 +32,52 @@ QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSGameOverENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSGameOverENDCLASS = QtMocHelpers::stringData(
-    "GameOver"
-);
-#else  // !QT_MOC_HAS_STRINGDATA
+struct qt_meta_stringdata_CLASSGameOverENDCLASS_t
+{};
+constexpr auto qt_meta_stringdata_CLASSGameOverENDCLASS = QtMocHelpers::stringData("GameOver");
+#else // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
 #endif // !QT_MOC_HAS_STRINGDATA
 } // unnamed namespace
 
 Q_CONSTINIT static const uint qt_meta_data_CLASSGameOverENDCLASS[] = {
 
- // content:
-      12,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       0,    0, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
+    // content:
+    12, // revision
+    0,  // classname
+    0,
+    0, // classinfo
+    0,
+    0, // methods
+    0,
+    0, // properties
+    0,
+    0, // enums/sets
+    0,
+    0, // constructors
+    0, // flags
+    0, // signalCount
 
-       0        // eod
+    0 // eod
 };
 
-Q_CONSTINIT const QMetaObject GameOver::staticMetaObject = { {
-    QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
-    qt_meta_stringdata_CLASSGameOverENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSGameOverENDCLASS,
-    qt_static_metacall,
-    nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSGameOverENDCLASS_t,
-        // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<GameOver, std::true_type>
-    >,
-    nullptr
-} };
+Q_CONSTINIT const QMetaObject GameOver::staticMetaObject = {
+    {QMetaObject::SuperData::link<QDialog::staticMetaObject>(),
+     qt_meta_stringdata_CLASSGameOverENDCLASS.offsetsAndSizes,
+     qt_meta_data_CLASSGameOverENDCLASS,
+     qt_static_metacall,
+     nullptr,
+     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSGameOverENDCLASS_t,
+                                 // Q_OBJECT / Q_GADGET
+                                 QtPrivate::TypeAndForceComplete<GameOver, std::true_type> >,
+     nullptr}};
 
 void GameOver::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    (void)_o;
-    (void)_id;
-    (void)_c;
-    (void)_a;
+    (void) _o;
+    (void) _id;
+    (void) _c;
+    (void) _a;
 }
 
 const QMetaObject *GameOver::metaObject() const
@@ -86,9 +87,10 @@ const QMetaObject *GameOver::metaObject() const
 
 void *GameOver::qt_metacast(const char *_clname)
 {
-    if (!_clname) return nullptr;
+    if (!_clname)
+        return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_CLASSGameOverENDCLASS.stringdata0))
-        return static_cast<void*>(this);
+        return static_cast<void *>(this);
     return QDialog::qt_metacast(_clname);
 }
 

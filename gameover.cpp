@@ -1,14 +1,24 @@
+
+
 #include "gameover.h"
-#include "ui_gameover.h"
+#include <QLabel>
+#include <QVBoxLayout>
 
 GameOver::GameOver(QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::GameOver)
 {
-    ui->setupUi(this);
+    QLabel *gameOverLabel = new QLabel("Game Over", this);
+    QFont font("Arial", 24, QFont::Bold); // Adjust font size and style as needed
+    gameOverLabel->setFont(font);
+    gameOverLabel->setAlignment(Qt::AlignCenter);
+
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(gameOverLabel);
+    setLayout(layout);
 }
 
 GameOver::~GameOver()
 {
-    delete ui;
 }
+
+

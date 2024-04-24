@@ -18,7 +18,6 @@ QT_BEGIN_NAMESPACE
 class Ui_GameOver
 {
 public:
-
     void setupUi(QDialog *GameOver)
     {
         if (GameOver->objectName().isEmpty())
@@ -34,11 +33,11 @@ public:
     {
         GameOver->setWindowTitle(QCoreApplication::translate("GameOver", "Dialog", nullptr));
     } // retranslateUi
-
 };
 
 namespace Ui {
-    class GameOver: public Ui_GameOver {};
+class GameOver : public Ui_GameOver
+{};
 } // namespace Ui
 
 QT_END_NAMESPACE

@@ -6,13 +6,12 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "block.h"
 #include <QtCore/qmetatype.h>
+#include "block.h"
 
 #include <QtCore/qtmochelpers.h>
 
 #include <memory>
-
 
 #include <QtCore/qxptype_traits.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
@@ -33,50 +32,52 @@ QT_WARNING_DISABLE_GCC("-Wuseless-cast")
 namespace {
 
 #ifdef QT_MOC_HAS_STRINGDATA
-struct qt_meta_stringdata_CLASSBlockENDCLASS_t {};
-constexpr auto qt_meta_stringdata_CLASSBlockENDCLASS = QtMocHelpers::stringData(
-    "Block"
-);
-#else  // !QT_MOC_HAS_STRINGDATA
+struct qt_meta_stringdata_CLASSBlockENDCLASS_t
+{};
+constexpr auto qt_meta_stringdata_CLASSBlockENDCLASS = QtMocHelpers::stringData("Block");
+#else // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
 #endif // !QT_MOC_HAS_STRINGDATA
 } // unnamed namespace
 
 Q_CONSTINIT static const uint qt_meta_data_CLASSBlockENDCLASS[] = {
 
- // content:
-      12,       // revision
-       0,       // classname
-       0,    0, // classinfo
-       0,    0, // methods
-       0,    0, // properties
-       0,    0, // enums/sets
-       0,    0, // constructors
-       0,       // flags
-       0,       // signalCount
+    // content:
+    12, // revision
+    0,  // classname
+    0,
+    0, // classinfo
+    0,
+    0, // methods
+    0,
+    0, // properties
+    0,
+    0, // enums/sets
+    0,
+    0, // constructors
+    0, // flags
+    0, // signalCount
 
-       0        // eod
+    0 // eod
 };
 
-Q_CONSTINIT const QMetaObject Block::staticMetaObject = { {
-    QMetaObject::SuperData::link<QObject::staticMetaObject>(),
-    qt_meta_stringdata_CLASSBlockENDCLASS.offsetsAndSizes,
-    qt_meta_data_CLASSBlockENDCLASS,
-    qt_static_metacall,
-    nullptr,
-    qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSBlockENDCLASS_t,
-        // Q_OBJECT / Q_GADGET
-        QtPrivate::TypeAndForceComplete<Block, std::true_type>
-    >,
-    nullptr
-} };
+Q_CONSTINIT const QMetaObject Block::staticMetaObject = {
+    {QMetaObject::SuperData::link<QObject::staticMetaObject>(),
+     qt_meta_stringdata_CLASSBlockENDCLASS.offsetsAndSizes,
+     qt_meta_data_CLASSBlockENDCLASS,
+     qt_static_metacall,
+     nullptr,
+     qt_incomplete_metaTypeArray<qt_meta_stringdata_CLASSBlockENDCLASS_t,
+                                 // Q_OBJECT / Q_GADGET
+                                 QtPrivate::TypeAndForceComplete<Block, std::true_type> >,
+     nullptr}};
 
 void Block::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    (void)_o;
-    (void)_id;
-    (void)_c;
-    (void)_a;
+    (void) _o;
+    (void) _id;
+    (void) _c;
+    (void) _a;
 }
 
 const QMetaObject *Block::metaObject() const
@@ -86,11 +87,12 @@ const QMetaObject *Block::metaObject() const
 
 void *Block::qt_metacast(const char *_clname)
 {
-    if (!_clname) return nullptr;
+    if (!_clname)
+        return nullptr;
     if (!strcmp(_clname, qt_meta_stringdata_CLASSBlockENDCLASS.stringdata0))
-        return static_cast<void*>(this);
+        return static_cast<void *>(this);
     if (!strcmp(_clname, "QGraphicsPixmapItem"))
-        return static_cast< QGraphicsPixmapItem*>(this);
+        return static_cast<QGraphicsPixmapItem *>(this);
     return QObject::qt_metacast(_clname);
 }
 

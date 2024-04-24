@@ -14,11 +14,12 @@ public:
     int health;
     int score;
     int playerSpeed;
-    void keyPressEvent(QKeyEvent *event) ;
+    void keyPressEvent(QKeyEvent *event);
+    void decreaseHealth();
+
 private:
     QGraphicsTextItem *healthText;
     QGraphicsTextItem *scoreText;
-
 };
 
 #endif // PLAYER_H
