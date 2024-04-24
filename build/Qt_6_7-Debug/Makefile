@@ -1229,9 +1229,9 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_imags.cpp
 qrc_imags.cpp: ../../imags.qrc \
 		/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/rcc \
-		../../vecteezy_glossy-buttons-clipart-design-illustration_9342302.png \
-		../../vecteezy_table-tennis-racket-and-ball-clipart-design-illustration_9385379.png \
-		../../block.png
+		../../block.png \
+		../../Bullet.png \
+		../../Player.png
 	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/rcc -name imags --no-zstd ../../imags.qrc -o qrc_imags.cpp
 
 compiler_moc_header_make_all: moc_ball.cpp moc_block.cpp moc_gameover.cpp moc_player.cpp

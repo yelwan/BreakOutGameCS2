@@ -4,7 +4,7 @@
 #include "gameover.h"
 Player::Player() : score(0), playerSpeed(10)
 {
-    QPixmap pix("/Users/daliakadry/Downloads/Rectangle.png");
+    QPixmap pix(":/images/Player.png");
     setPixmap(pix.scaled(25,25));
     setPos(375,555);
     score = 0; // Initialize score to 0

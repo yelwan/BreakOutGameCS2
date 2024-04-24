@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/images">
-        <file>vecteezy_glossy-buttons-clipart-design-illustration_9342302.png</file>
-        <file>vecteezy_table-tennis-racket-and-ball-clipart-design-illustration_9385379.png</file>
+        <file>Player.png</file>
+        <file>Bullet.png</file>
         <file>block.png</file>
     </qresource>
 </RCC>

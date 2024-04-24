@@ -9,7 +9,7 @@ Ball::Ball(Player* player)
     : velocityX(5)
     , velocityY(-5)
 {
-    QPixmap pix(":/images/vecteezy_table-tennis-racket-and-ball-clipart-design-illustration_9385379.png");
+    QPixmap pix(":/images/Bullet.png");
     setPixmap(pix.scaled(25, 25));
     setPos(375, 475);
     this->player= player;
