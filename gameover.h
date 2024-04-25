@@ -15,7 +15,7 @@ class GameOver : public QDialog
 
 public:
     explicit GameOver(QWidget *parent = nullptr);
-    ~GameOver();
+
 
 private:
     QLabel *gameOverLabel; // You may need to include QLabel header if not included
