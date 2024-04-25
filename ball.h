@@ -4,7 +4,7 @@
 #include <QGraphicsEllipseItem>
 #include <QObject>
 #include <QTimer>
-
+#include "player.h"
 class Ball : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
@@ -12,10 +12,13 @@ private:
     QTimer *timer;
     int velocityX;
     int velocityY;
+    Player *player;
+    int restartCount;
 
 public:
-    Ball();
- public slots:
+    Ball(Player *player);
+    void restartGame();
+public slots:
     void move();
 };
 

@@ -3,13 +3,12 @@
 
 #include <QGraphicsRectItem>
 
-class Block :  public QObject , public QGraphicsPixmapItem
+class Block : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 
 public:
     Block(qreal x, qreal y);
-
 };
 
 #endif // BLOCK_H

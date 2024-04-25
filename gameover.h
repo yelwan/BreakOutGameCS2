@@ -1,7 +1,9 @@
+
 #ifndef GAMEOVER_H
 #define GAMEOVER_H
 
 #include <QDialog>
+#include <QLabel>
 
 namespace Ui {
 class GameOver;
@@ -16,7 +18,7 @@ public:
     ~GameOver();
 
 private:
-    Ui::GameOver *ui;
+    QLabel *gameOverLabel; // You may need to include QLabel header if not included
 };
 
 #endif // GAMEOVER_H

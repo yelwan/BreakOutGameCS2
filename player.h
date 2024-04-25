@@ -5,21 +5,23 @@
 #include <QGraphicsScene>
 #include <QGraphicsTextItem>
 #include <QKeyEvent>
-
+#include <QTimer>
 class Player : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 public:
     Player();
-    int health;
+    void keyPressEvent(QKeyEvent *event);
+    void decrease();
+    void updateText();
+    void initializeText(
+        QGraphicsTextItem *textItem, const QString &text, const QColor &color, int x, int y, int T);
+    void increase();
+
+private:
     int score;
     int playerSpeed;
-public:
-    void keyPressEvent(QKeyEvent *event) ;
-private:
-    QGraphicsTextItem *healthText;
     QGraphicsTextItem *scoreText;
-
 };
 
 #endif // PLAYER_H
