@@ -13,9 +13,11 @@ private:
     int velocityX;
     int velocityY;
     Player *player;
+    int restartCount;
 
 public:
     Ball(Player *player);
+    void restartGame();
 public slots:
     void move();
 };

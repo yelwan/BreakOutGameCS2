@@ -1,5 +1,4 @@
 
-
 #include "gameover.h"
 #include <QLabel>
 #include <QVBoxLayout>
