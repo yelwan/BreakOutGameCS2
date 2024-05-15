@@ -1,62 +1,30 @@
-#include <QApplication>
-#include <QGraphicsPixmapItem>
-#include <QGraphicsScene>
-#include <QGraphicsTextItem>
-#include <QGraphicsView>
-#include <QTimer>
-#include "ball.h"
-#include "block.h"
-#include "player.h"
+#include "levelmanager.h"
+#include "level1.h"
+#include "level2.h"
+#include "level3.h"
+#include "level4.h"
+#include "level5.h"
 
-// Main function
-int main(int argc, char *argv[])
+int main()
 {
-    // Create a QApplication object
-    QApplication a(argc, argv);
+    LevelManager levelManager;
 
-    // Create a QGraphicsView object
-    QGraphicsView view;
+    // Create instances of different levels
+    Level1 *level1 = new Level1();
+    Level2 *level2 = new Level2();
+    Level3 *level3 = new Level3();
+    Level4 *level4 = new Level4();
+    Level5 *level5 = new Level5();
 
-    // Create a QGraphicsScene object
-    QGraphicsScene scene;
+    // Add levels to the manager
+    levelManager.addLevel(level1);
+    levelManager.addLevel(level2);
+    levelManager.addLevel(level3);
+    levelManager.addLevel(level4);
+    levelManager.addLevel(level5);
 
-    // Set the scene rectangle (dimensions of the scene)
-    scene.setSceneRect(0, 0, 800, 600);
+    // Start the game
+    levelManager.start();
 
-    // Create a new Player object
-    Player *player = new Player();
-
-    // Allow the player item to receive keyboard focus
-    player->setFlag(QGraphicsItem::ItemIsFocusable);
-
-    // Set focus to the player item
-    player->setFocus();
-
-    // Add the player item to the scene
-    scene.addItem(player);
-
-    // Loop to create blocks (5 rows x 10 columns)
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 10; j++) {
-            qreal blockX = j * 80;  // Calculate x-coordinate for block
-            qreal blockY = i * 20;  // Calculate y-coordinate for block
-            Block *block = new Block(blockX, blockY); // Create a new Block object
-            scene.addItem(block);   // Add the block to the scene
-        }
-    }
-
-    // Create a new Ball object with the player as its parent
-    Ball *ball = new Ball(player);
-
-    // Add the ball to the scene
-    scene.addItem(ball);
-
-    // Set the scene for the QGraphicsView
-    view.setScene(&scene);
-
-    // Show the QGraphicsView
-    view.show();
-
-    // Start the application event loop
-    return a.exec();
+    return 0;
 }
