@@ -55,47 +55,21 @@ OBJECTS_DIR   = ./
 SOURCES       = ball.cpp \
 		block.cpp \
 		gameover.cpp \
-		level1.cpp \
-		level2.cpp \
-		level3.cpp \
-		level4.cpp \
-		level5.cpp \
-		levelbase.cpp \
-		levelmanager.cpp \
+		level.cpp \
 		main.cpp \
-		player.cpp qrc_imags.cpp \
-		moc_ball.cpp \
+		player.cpp moc_ball.cpp \
 		moc_block.cpp \
 		moc_gameover.cpp \
-		moc_level2.cpp \
-		moc_level3.cpp \
-		moc_level4.cpp \
-		moc_level5.cpp \
-		moc_levelbase.cpp \
-		moc_levelmanager.cpp \
 		moc_player.cpp
 OBJECTS       = ball.o \
 		block.o \
 		gameover.o \
-		level1.o \
-		level2.o \
-		level3.o \
-		level4.o \
-		level5.o \
-		levelbase.o \
-		levelmanager.o \
+		level.o \
 		main.o \
 		player.o \
-		qrc_imags.o \
 		moc_ball.o \
 		moc_block.o \
 		moc_gameover.o \
-		moc_level2.o \
-		moc_level3.o \
-		moc_level4.o \
-		moc_level5.o \
-		moc_levelbase.o \
-		moc_levelmanager.o \
 		moc_player.o
 DIST          = ../../../Desktop/qt2/6.7.0/macos/mkspecs/features/spec_pre.prf \
 		../../../Desktop/qt2/6.7.0/macos/mkspecs/features/device_config.prf \
@@ -454,23 +428,11 @@ DIST          = ../../../Desktop/qt2/6.7.0/macos/mkspecs/features/spec_pre.prf \
 		BreakOutGame.pro ball.h \
 		block.h \
 		gameover.h \
-		level1.h \
-		level2.h \
-		level3.h \
-		level4.h \
-		level5.h \
-		levelbase.h \
-		levelmanager.h \
+		level.h \
 		player.h ball.cpp \
 		block.cpp \
 		gameover.cpp \
-		level1.cpp \
-		level2.cpp \
-		level3.cpp \
-		level4.cpp \
-		level5.cpp \
-		levelbase.cpp \
-		levelmanager.cpp \
+		level.cpp \
 		main.cpp \
 		player.cpp
 QMAKE_TARGET  = BreakOutGame
@@ -493,7 +455,7 @@ include /Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/features/mac/sdk.mk
 first: all
 ####### Build rules
 
-BreakOutGame.app/Contents/MacOS/BreakOutGame: ui_gameover.h ui_levelmanager.h $(OBJECTS)  
+BreakOutGame.app/Contents/MacOS/BreakOutGame: ui_gameover.h $(OBJECTS)  
 	@test -d BreakOutGame.app/Contents/MacOS/ || mkdir -p BreakOutGame.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET)  $(OBJECTS) $(OBJCOMP) $(LIBS)
 	mkdir -p '/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2/BreakOutGame.app.dSYM/Contents/Resources/DWARF' && dsymutil BreakOutGame.app/Contents/MacOS/BreakOutGame --flat -o BreakOutGame.app.dSYM/Contents/Resources/DWARF/BreakOutGame && strip -S BreakOutGame.app/Contents/MacOS/BreakOutGame
@@ -854,7 +816,6 @@ Makefile: BreakOutGame.pro ../../../Desktop/qt2/6.7.0/macos/mkspecs/macx-clang/q
 		../../../Desktop/qt2/6.7.0/macos/mkspecs/features/lex.prf \
 		BreakOutGame.pro \
 		../../../Desktop/qt2/6.7.0/macos/mkspecs/macx-clang/Info.plist.dSYM.in \
-		imags.qrc \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Resources/QtGui.prl \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Resources/QtCore.prl
@@ -1215,7 +1176,6 @@ Makefile: BreakOutGame.pro ../../../Desktop/qt2/6.7.0/macos/mkspecs/macx-clang/q
 ../../../Desktop/qt2/6.7.0/macos/mkspecs/features/lex.prf:
 BreakOutGame.pro:
 ../../../Desktop/qt2/6.7.0/macos/mkspecs/macx-clang/Info.plist.dSYM.in:
-imags.qrc:
 ../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Resources/QtWidgets.prl:
 ../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Resources/QtGui.prl:
 ../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Resources/QtCore.prl:
@@ -1243,10 +1203,9 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents imags.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ball.h block.h gameover.h level1.h level2.h level3.h level4.h level5.h levelbase.h levelmanager.h player.h $(DISTDIR)/
-	$(COPY_FILE) --parents ball.cpp block.cpp gameover.cpp level1.cpp level2.cpp level3.cpp level4.cpp level5.cpp levelbase.cpp levelmanager.cpp main.cpp player.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents gameover.ui levelmanager.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ball.h block.h gameover.h level.h player.h $(DISTDIR)/
+	$(COPY_FILE) --parents ball.cpp block.cpp gameover.cpp level.cpp main.cpp player.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents gameover.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -1273,19 +1232,11 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all: qrc_imags.cpp
+compiler_rcc_make_all:
 compiler_rcc_clean:
-	-$(DEL_FILE) qrc_imags.cpp
-qrc_imags.cpp: imags.qrc \
-		../../../Desktop/qt2/6.7.0/macos/libexec/rcc \
-		block.png \
-		Bullet.png \
-		Player.png
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/rcc -name imags --no-zstd imags.qrc -o qrc_imags.cpp
-
-compiler_moc_header_make_all: moc_ball.cpp moc_block.cpp moc_gameover.cpp moc_level2.cpp moc_level3.cpp moc_level4.cpp moc_level5.cpp moc_levelbase.cpp moc_levelmanager.cpp moc_player.cpp
+compiler_moc_header_make_all: moc_ball.cpp moc_block.cpp moc_gameover.cpp moc_player.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_ball.cpp moc_block.cpp moc_gameover.cpp moc_level2.cpp moc_level3.cpp moc_level4.cpp moc_level5.cpp moc_levelbase.cpp moc_levelmanager.cpp moc_player.cpp
+	-$(DEL_FILE) moc_ball.cpp moc_block.cpp moc_gameover.cpp moc_player.cpp
 moc_ball.cpp: ball.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
@@ -1293,13 +1244,6 @@ moc_ball.cpp: ball.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
 		../../../Desktop/qt2/6.7.0/macos/libexec/moc
 	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib ball.h -o moc_ball.cpp
 
@@ -1312,141 +1256,8 @@ moc_block.cpp: block.h \
 moc_gameover.cpp: gameover.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../../Desktop/qt2/6.7.0/macos/libexec/moc
 	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib gameover.h -o moc_gameover.cpp
-
-moc_level2.cpp: level2.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/libexec/moc
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib level2.h -o moc_level2.cpp
-
-moc_level3.cpp: level3.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/libexec/moc
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib level3.h -o moc_level3.cpp
-
-moc_level4.cpp: level4.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/libexec/moc
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib level4.h -o moc_level4.cpp
-
-moc_level5.cpp: level5.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/libexec/moc
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib level5.h -o moc_level5.cpp
-
-moc_levelbase.cpp: levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		../../../Desktop/qt2/6.7.0/macos/libexec/moc
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib levelbase.h -o moc_levelbase.cpp
-
-moc_levelmanager.cpp: levelmanager.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QList \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qlist.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		../../../Desktop/qt2/6.7.0/macos/libexec/moc
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=13 -D__clang_minor__=1 -D__clang_patchlevel__=6 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/mkspecs/macx-clang -I'/Users/daliakadry/Downloads/session 5 - game - Exercise/BreakOutGameCS2' -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers -I/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/13.1.6/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/daliakadry/Desktop/qt2/6.7.0/macos/lib levelmanager.h -o moc_levelmanager.cpp
 
 moc_player.cpp: player.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
@@ -1465,16 +1276,12 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_gameover.h ui_levelmanager.h
+compiler_uic_make_all: ui_gameover.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_gameover.h ui_levelmanager.h
+	-$(DEL_FILE) ui_gameover.h
 ui_gameover.h: gameover.ui \
 		../../../Desktop/qt2/6.7.0/macos/libexec/uic
 	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/uic gameover.ui -o ui_gameover.h
-
-ui_levelmanager.h: levelmanager.ui \
-		../../../Desktop/qt2/6.7.0/macos/libexec/uic
-	/Users/daliakadry/Desktop/qt2/6.7.0/macos/libexec/uic levelmanager.ui -o ui_levelmanager.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -1484,17 +1291,17 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_rcc_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
-ball.o: ball.cpp ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+ball.o: ball.cpp ../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
+		ball.h \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		player.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
@@ -1502,12 +1309,7 @@ ball.o: ball.cpp ball.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h
+		block.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ball.o ball.cpp
 
 block.o: block.cpp block.h \
@@ -1518,194 +1320,32 @@ block.o: block.cpp block.h \
 gameover.o: gameover.cpp gameover.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QVBoxLayout \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qboxlayout.h
+		ui_gameover.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gameover.o gameover.cpp
 
-level1.o: level1.cpp level1.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
+level.o: level.cpp level.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o level.o level.cpp
+
+main.o: main.cpp ../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
 		player.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o level1.o level1.cpp
-
-level2.o: level2.cpp level2.h \
 		ball.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o level2.o level2.cpp
-
-level3.o: level3.cpp level3.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o level3.o level3.cpp
-
-level4.o: level4.cpp level4.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o level4.o level4.cpp
-
-level5.o: level5.cpp level5.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		levelbase.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o level5.o level5.cpp
-
-levelbase.o: levelbase.cpp levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o levelbase.o levelbase.cpp
-
-levelmanager.o: levelmanager.cpp levelmanager.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QList \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qlist.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o levelmanager.o levelmanager.cpp
-
-main.o: main.cpp levelmanager.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QObject \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qobject.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QList \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qlist.h \
-		levelbase.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsScene \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsView \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsview.h \
-		level1.h \
-		ball.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsEllipseItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		player.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsTextItem \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
-		block.h \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h \
-		level2.h \
-		level3.h \
-		level4.h \
-		level5.h
+		block.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 player.o: player.cpp player.h \
@@ -1718,16 +1358,8 @@ player.o: player.cpp player.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtGui.framework/Headers/qevent.h \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/QTimer \
 		../../../Desktop/qt2/6.7.0/macos/lib/QtCore.framework/Headers/qtimer.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem \
-		gameover.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/qlabel.h
+		../../../Desktop/qt2/6.7.0/macos/lib/QtWidgets.framework/Headers/QGraphicsPixmapItem
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o player.o player.cpp
-
-qrc_imags.o: qrc_imags.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_imags.o qrc_imags.cpp
 
 moc_ball.o: moc_ball.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_ball.o moc_ball.cpp
@@ -1737,24 +1369,6 @@ moc_block.o: moc_block.cpp
 
 moc_gameover.o: moc_gameover.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_gameover.o moc_gameover.cpp
-
-moc_level2.o: moc_level2.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_level2.o moc_level2.cpp
-
-moc_level3.o: moc_level3.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_level3.o moc_level3.cpp
-
-moc_level4.o: moc_level4.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_level4.o moc_level4.cpp
-
-moc_level5.o: moc_level5.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_level5.o moc_level5.cpp
-
-moc_levelbase.o: moc_levelbase.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_levelbase.o moc_levelbase.cpp
-
-moc_levelmanager.o: moc_levelmanager.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_levelmanager.o moc_levelmanager.cpp
 
 moc_player.o: moc_player.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_player.o moc_player.cpp
