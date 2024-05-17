@@ -6,20 +6,20 @@
 
 // Constructor for the Player class
 Player::Player()
-    : score(0), playerSpeed(10), coins(0), originalWidth(25) // Initialize original width
+    : score(0), playerSpeed(15), coins(0), originalWidth(25) // Initialize original width
 {
+
     QPixmap pix(":/images/Player.png");
     setPixmap(pix.scaled(originalWidth, 25));
     setPos(375, 555);
-
     // Initialize score text
     scoreText = new QGraphicsTextItem();
     scoreText->setPlainText(QString("Score: ") + QString::number(score));
     scoreText->setDefaultTextColor(Qt::blue);
     scoreText->setPos(0, 300);
     scene()->addItem(scoreText);
-
-    // Initialize coins text below score text
+    setFlag(QGraphicsItem::ItemIsFocusable);
+    setFocus();
     coinsText = new QGraphicsTextItem();
     coinsText->setPlainText(QString("Coins: ") + QString::number(coins));
     coinsText->setDefaultTextColor(Qt::green);
@@ -81,12 +81,9 @@ void Player::deactivateWeapon()
     weaponTimer.stop();
 }
 
-// Key press event handler for the Player class
+// Key press  handler for the Player class
 void Player::keyPressEvent(QKeyEvent *event)
 {
-    initializeText(scoreText, "Score: ", Qt::blue, 60, 250, score);
-    initializeText(coinsText, "Coins: ", Qt::green, 60, 300, coins);
-
     if (event->key() == Qt::Key_Left) {
         if (pos().x() > 0) {
             setPos(x() - playerSpeed, y());
@@ -103,7 +100,8 @@ void Player::keyPressEvent(QKeyEvent *event)
     if (event->key() == Qt::Key_W) {
         buyWeapon("IncreaseWidth");
     }
-
+    initializeText(scoreText, "Score: ", Qt::blue, 60, 250, score);
+    initializeText(coinsText, "Coins: ", Qt::green, 60, 300, coins);
     updateText();
 }
 

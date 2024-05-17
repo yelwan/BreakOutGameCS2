@@ -1,20 +1,11 @@
-#include <QApplication>
-#include <QGraphicsPixmapItem>
-#include <QGraphicsScene>
-#include <QGraphicsTextItem>
-#include <QGraphicsView>
-#include <QTimer>
-#include "ball.h"
-#include "block.h"
-#include "player.h"
-#include "mainwindow.h"
-// Main function
-int main(int argc, char *argv[])
-{
-    // Create a QApplication object
-    QApplication a(argc, argv);
-    MainWindow m;
-    m.show();
-    // Start the application event loop
-    return a.exec();
+#include <QApplication> // Include necessary header file for QApplication
+#include "mainwindow.h" // Include the header file for the MainWindow class
+
+int main(int argc, char *argv[]) {
+    QApplication a(argc, argv); // Create a QApplication object
+
+    MainWindow w; // Instantiate the MainWindow object
+    w.show(); // Show the MainWindow
+
+    return a.exec(); // Execute the application event loop
 }
