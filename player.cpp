@@ -96,7 +96,7 @@ void Player::keyPressEvent(QKeyEvent *event)
         }
     }
 
-    // Test: Buy and activate "IncreaseWidth" weapon with the "P" key
+    // Test: Buy and activate "IncreaseWidth" weapon with the "W" key
     if (event->key() == Qt::Key_W) {
         buyWeapon("IncreaseWidth");
     }
