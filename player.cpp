@@ -1,55 +1,109 @@
 #include "player.h"
 #include <QGraphicsPixmapItem>
+#include <QKeyEvent>
 #include <QTimer>
 #include "gameover.h"
 
 // Constructor for the Player class
 Player::Player()
-    : score(0)             // Initialize score member variable to 0
-    , playerSpeed(10)      // Set player movement speed to 10 pixels per move
+    : score(0), playerSpeed(10), coins(0), originalWidth(25) // Initialize original width
 {
-    // Load player image from resource file
     QPixmap pix(":/images/Player.png");
-    // Scale the player image to 25x25 pixels and set it as the pixmap for the player
-    setPixmap(pix.scaled(25, 25));
-    // Set initial position of the player on the scene (375, 555)
+    setPixmap(pix.scaled(originalWidth, 25));
     setPos(375, 555);
 
-    score = 0; // Initialize score to 0
-
-    // Create a QGraphicsTextItem for displaying the score
+    // Initialize score text
     scoreText = new QGraphicsTextItem();
-    // Set the text for the score text item
     scoreText->setPlainText(QString("Score: ") + QString::number(score));
-    // Set the default text color to blue
     scoreText->setDefaultTextColor(Qt::blue);
-    // Set the position of the score text item (0, 300) relative to the scene
     scoreText->setPos(0, 300);
-    // Add the score text item to the scene
     scene()->addItem(scoreText);
+
+    // Initialize coins text below score text
+    coinsText = new QGraphicsTextItem();
+    coinsText->setPlainText(QString("Coins: ") + QString::number(coins));
+    coinsText->setDefaultTextColor(Qt::green);
+    coinsText->setPos(0, 320);  // Position it below the score text
+    scene()->addItem(coinsText); // Add coinsText to the scene
+
+    connect(&weaponTimer, &QTimer::timeout, this, &Player::deactivateWeapon);
+}
+
+// Function to increase score and update score text
+void Player::increase()
+{
+    score++;
+    scoreText->setPlainText("Score: " + QString::number(score));
+
+    // Example: Earn a coin for every 10 points
+    if (score % 10 == 0) {
+        increaseCoins(1);
+    }
+}
+
+// Function to increase coins and update coins text
+void Player::increaseCoins(int amount)
+{
+    coins += amount;
+    coinsText->setPlainText("Coins: " + QString::number(coins));
+}
+
+// Function to buy a weapon
+void Player::buyWeapon(const QString &weaponName)
+{
+    // Weapon costs 1 coin
+    if (coins >= 1) {
+        coins -= 1;
+        coinsText->setPlainText("Coins: " + QString::number(coins));
+        activateWeapon(weaponName);
+    }
+}
+
+// Function to activate a weapon
+void Player::activateWeapon(const QString &weaponName)
+{
+    activeWeapon = weaponName;
+    if (weaponName == "IncreaseWidth") {
+        setPixmap(pixmap().scaled(originalWidth * 2, 25)); // Double the width
+    }
+
+    weaponTimer.start(10000); // Weapon lasts for 10 seconds
+}
+
+// Function to deactivate weapon effects
+void Player::deactivateWeapon()
+{
+    if (activeWeapon == "IncreaseWidth") {
+        setPixmap(pixmap().scaled(originalWidth, 25)); // Reset width to original
+    }
+
+    activeWeapon.clear();
+    weaponTimer.stop();
 }
 
 // Key press event handler for the Player class
 void Player::keyPressEvent(QKeyEvent *event)
 {
-    // Initialize text properties using helper function
-    initializeText(scoreText, "Score: ", Qt::blue, 60, 100, score);
+    initializeText(scoreText, "Score: ", Qt::blue, 60, 250, score);
+    initializeText(coinsText, "Coins: ", Qt::green, 60, 300, coins);
 
-    // Move player left when left arrow key is pressed
     if (event->key() == Qt::Key_Left) {
         if (pos().x() > 0) {
             setPos(x() - playerSpeed, y());
         }
     }
 
-    // Move player right when right arrow key is pressed
     if (event->key() == Qt::Key_Right) {
         if (pos().x() + pixmap().width() < scene()->width()) {
             setPos(x() + playerSpeed, y());
         }
     }
 
-    // Update the score text after moving
+    // Test: Buy and activate "IncreaseWidth" weapon with the "P" key
+    if (event->key() == Qt::Key_W) {
+        buyWeapon("IncreaseWidth");
+    }
+
     updateText();
 }
 
@@ -57,20 +111,14 @@ void Player::keyPressEvent(QKeyEvent *event)
 void Player::updateText()
 {
     scoreText->setPlainText("Score: " + QString::number(score));
+    coinsText->setPlainText("Coins: " + QString::number(coins));
 }
 
 // Helper function to initialize a QGraphicsTextItem with specified properties
 void Player::initializeText(QGraphicsTextItem *textItem, const QString &text, const QColor &color, int x, int y, int T)
 {
-    textItem->setPlainText(text + QString::number(T)); // Set text with score
-    textItem->setDefaultTextColor(color);              // Set text color
-    textItem->setPos(x, y);                            // Set position of text item
-    scene()->addItem(textItem);                        // Add text item to the scene
-}
-
-// Increase the player's score and update the score text item
-void Player::increase()
-{
-    score++; // Increment the score
-    scoreText->setPlainText("Score: " + QString::number(score)); // Update score text
+    textItem->setPlainText(text + QString::number(T));
+    textItem->setDefaultTextColor(color);
+    textItem->setPos(x, y);
+    scene()->addItem(textItem);
 }
