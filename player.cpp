@@ -60,8 +60,7 @@ void Player::updateText()
 }
 
 // Helper function to initialize a QGraphicsTextItem with specified properties
-void Player::initializeText(
-    QGraphicsTextItem *textItem, const QString &text, const QColor &color, int x, int y, int T)
+void Player::initializeText(QGraphicsTextItem *textItem, const QString &text, const QColor &color, int x, int y, int T)
 {
     textItem->setPlainText(text + QString::number(T)); // Set text with score
     textItem->setDefaultTextColor(color);              // Set text color

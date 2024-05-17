@@ -16,7 +16,7 @@ private:
     int restartCount;
 
 public:
-    Ball(Player *player);
+   explicit Ball(Player*);
     void restartGame();
 public slots:
     void move();
